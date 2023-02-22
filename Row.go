@@ -21,7 +21,7 @@ func (r *Row) GetChair(c int) (bool, error) {
 	return false, errors.New("Wrong Input")
 }
 
-func (r *Row) SetChair(c int) error {
+func (r *Row) ToggleChair(c int) error {
 	if c < 4 {
 		r.leftChairs[c-1].SetAval(!r.leftChairs[c-1].GetAval())
 		return nil
@@ -30,6 +30,19 @@ func (r *Row) SetChair(c int) error {
 		return nil
 	} else if c > 7 && c < 11 {
 		r.leftChairs[c-8].SetAval(!r.leftChairs[c-8].GetAval())
+		return nil
+	}
+	return errors.New("Wrong Input")
+}
+func (r *Row) SetChair(c int, b bool) error {
+	if c < 4 {
+		r.leftChairs[c-1].SetAval(b)
+		return nil
+	} else if c > 3 && c < 8 {
+		r.leftChairs[c-4].SetAval(b)
+		return nil
+	} else if c > 7 && c < 11 {
+		r.leftChairs[c-8].SetAval(b)
 		return nil
 	}
 	return errors.New("Wrong Input")
